@@ -1,0 +1,21 @@
+import requests
+from bs4 import BeautifulSoup
+
+KEYWORDS = ['дизайн', 'фото', 'web', 'python']
+url = "https://habr.com/ru/articles"
+
+response = requests.get(url)
+soup = BeautifulSoup(response.text, 'lxml')
+
+articles_list = soup.findAll('article')
+
+for article in articles_list:
+    time = article.find('time')['datetime']
+    title = article.find('h2').text.strip().lower()
+    link = f"https://habr.com{article.find('a', class_='tm-title__link')['href']}"
+    # print(f" Время: {time}\n Заголовок: {title}\n Ссылка: {link}\n")
+    found_keywords = any(keyword.lower() in title for keyword in KEYWORDS)
+    if found_keywords:
+        print(f" Время: {time}\n Заголовок: {title}\n Ссылка: {link}\n")
+    # else:
+    #     print(f"Заголовки с ключевыми словами не найдены {KEYWORDS} не найдены!") # проверка условия , если не находит
