@@ -18,4 +18,4 @@ for article in articles_list:
     if found_keywords:
         print(f" Время: {time}\n Заголовок: {title}\n Ссылка: {link}\n")
     # else:
-    #     print(f"Заголовки с ключевыми словами не найдены {KEYWORDS} не найдены!") # проверка условия , если не находит
+    #     print(f"Заголовки с ключевыми словами {KEYWORDS} не найдены!") # проверка условия , если не находит
